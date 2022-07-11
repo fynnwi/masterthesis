@@ -1,8 +1,8 @@
 ---
-title: "droplet_volumes"
+title: "Volume Estimations"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{droplet_volumes}
+  %\VignetteIndexEntry{Volume estimations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,10 +18,12 @@ knitr::opts_chunk$set(
 library(masterthesis)
 ```
 
-In this vignette, calculations to estimate volumes and quantities relevent for the droplet making and picoinjection workflow are carried out.
+In this vignette, calculations to estimate volumes and quantities relevant for the droplet making and picoinjection workflow are documented.
 
 
 
+
+### Droplets
 
 How many droplets are there in x mm of Tygon/PTFE tubing?
 
@@ -35,10 +37,12 @@ Assuming close-packing of equal spheres: fraction of space occupied by spheres i
 
 $$\frac{\pi}{3 \sqrt{2}} \approx 0.74048$$
 
+### Tubing
 
 Volume of a cylinder with radius $r$ and height $h$:
 
 $$V = \pi r^2 h$$
+
 
 
 
