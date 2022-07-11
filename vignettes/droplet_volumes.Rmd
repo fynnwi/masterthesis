@@ -1,0 +1,50 @@
+---
+title: "droplet_volumes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{droplet_volumes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE}
+# library(masterthesis)
+library(tidyverse)
+```
+
+In this vignette, calculations to estimate volumes and quantities relevent for the droplet making and picoinjection workflow are carried out.
+
+
+
+
+How many droplets are there in x mm of Tygon/PTFE tubing?
+
+
+```{r}
+diameterDroplet <- 30e-6 # 30 micron droplets
+diameterTubing <- 0.8e-3 # 0.8 mm ID PTFE tubing
+```
+
+Assuming close-packing of equal spheres: fraction of space occupied by spheres is
+
+$$\frac{\pi}{3 \sqrt{2}} \approx 0.74048$$
+
+
+Volume of a cylinder with radius $r$ and height $h$:
+
+$$V = \pi r^2 h$$
+
+
+
+
+
+
+
+
