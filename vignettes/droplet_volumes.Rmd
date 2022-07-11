@@ -15,8 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, message=FALSE}
-# library(masterthesis)
-library(tidyverse)
+library(masterthesis)
 ```
 
 In this vignette, calculations to estimate volumes and quantities relevent for the droplet making and picoinjection workflow are carried out.
