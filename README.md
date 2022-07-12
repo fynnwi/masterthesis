@@ -6,7 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of masterthesis is to …
+The goal of masterthesis is to document calculations and estimations
+used in my master thesis.
 
 ## Installation
 
