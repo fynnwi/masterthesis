@@ -16,9 +16,53 @@ knitr::opts_chunk$set(
 
 ```{r setup, message=FALSE}
 library(masterthesis)
+library(dplyr)
+library(ggplot2)
 ```
 
 In this vignette, calculations to estimate volumes and quantities relevant for the droplet making and picoinjection workflow are documented.
+
+
+### Tubing
+
+Volume of a cylinder with radius $r$ and height $h$:
+
+$$V = \pi r^2 h$$
+
+```{r}
+getCylinderVolume <- function(radius, height) {
+  return(pi * radius^2 * height)
+}
+```
+
+
+
+Tubing options
+
+- Tygon: ID = 0.020 in = 0.508 mm, OD = 0.060 in = 1.524 mm
+- Bola PTFE: ID = 0.8 mm, OD = 1.6 mm
+
+```{r}
+radiusTygon <- 0.508e-3 / 2
+radiusPTFE <- 0.8e-3 / 2
+```
+
+
+Plot the tubing volume as a function of tubing length for lengths up to 1 meter:
+
+```{r}
+tibble::tibble("length" = seq(1,1000)) %>% 
+  # dplyr::mutate(length = length * 10^(-3)) %>% # convert into mm
+  dplyr::mutate(v_tygon = getCylinderVolume(radiusTygon, length),
+                v_ptfe = getCylinderVolume(radiusPTFE, length)) %>%
+  tidyr::pivot_longer(c(v_tygon, v_ptfe), names_to = "type", values_to = "volume") %>% 
+  ggplot(aes(x = length, y = volume, color = type)) + 
+  geom_line() + 
+  scale_colour_viridis_d() + 
+  labs(x = "Tubing length [mm]",
+       y = "Tubing volume [mm^3]") + 
+  theme_fynn()
+```
 
 
 
@@ -36,14 +80,6 @@ diameterTubing <- 0.8e-3 # 0.8 mm ID PTFE tubing
 Assuming close-packing of equal spheres: fraction of space occupied by spheres is
 
 $$\frac{\pi}{3 \sqrt{2}} \approx 0.74048$$
-
-### Tubing
-
-Volume of a cylinder with radius $r$ and height $h$:
-
-$$V = \pi r^2 h$$
-
-
 
 
 
