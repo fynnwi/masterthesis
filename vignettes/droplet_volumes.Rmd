@@ -1,8 +1,8 @@
 ---
-title: "Volume Estimations"
+title: "Volume Estimates"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Volume estimations}
+  %\VignetteIndexEntry{Volume Estimates}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,6 +43,7 @@ Tubing options
 - Bola PTFE: ID = 0.8 mm, OD = 1.6 mm
 
 ```{r}
+# everything in m
 radiusTygon <- 0.508e-3 / 2
 radiusPTFE <- 0.8e-3 / 2
 ```
@@ -51,16 +52,19 @@ radiusPTFE <- 0.8e-3 / 2
 Plot the tubing volume as a function of tubing length for lengths up to 1 meter:
 
 ```{r}
-tibble::tibble("length" = seq(1,1000)) %>% 
-  # dplyr::mutate(length = length * 10^(-3)) %>% # convert into mm
+volumes <- tibble::tibble("length" = seq(1,1000)) %>% 
+  dplyr::mutate(length = length * 1e-3) %>% # convert into mm
   dplyr::mutate(v_tygon = getCylinderVolume(radiusTygon, length),
                 v_ptfe = getCylinderVolume(radiusPTFE, length)) %>%
-  tidyr::pivot_longer(c(v_tygon, v_ptfe), names_to = "type", values_to = "volume") %>% 
-  ggplot(aes(x = length, y = volume, color = type)) + 
+  tidyr::pivot_longer(c(v_tygon, v_ptfe), names_to = "type", values_to = "volume")
+volumes
+
+ggplot(volumes, aes(x = length, y = volume * 1e9, color = type)) + 
   geom_line() + 
-  scale_colour_viridis_d() + 
-  labs(x = "Tubing length [mm]",
-       y = "Tubing volume [mm^3]") + 
+  scale_colour_viridis_d(labels = c("PTFE", "Tygon")) + 
+  labs(x = "Tubing length [m]",
+       y = "Tubing volume [µL]",
+       color = "Tubing type") + 
   theme_fynn()
 ```
 
@@ -73,15 +77,38 @@ How many droplets are there in x mm of Tygon/PTFE tubing?
 
 
 ```{r}
-diameterDroplet <- 30e-6 # 30 micron droplets
-diameterTubing <- 0.8e-3 # 0.8 mm ID PTFE tubing
+radiusDroplet <- 15e-6 # 30 micron droplets
 ```
 
 Assuming close-packing of equal spheres: fraction of space occupied by spheres is
 
 $$\frac{\pi}{3 \sqrt{2}} \approx 0.74048$$
 
+Using this packing density, I can calculate the volume occupied by spheres for a given tubing length.
+Dividing by the known volume of a single droplet yields the total number of droplets contained in x meters of tubing, assuming close-packing of equal spheres.
 
+```{r}
+getNumberOfClosePackedSpheres <- function(radius, volume) {
+  volumeSingleSphere <- 4/3 * pi * radius^3
+  packingDensity <- pi/3/sqrt(2)
+  return(packingDensity * volume / volumeSingleSphere)
+}
+```
+
+
+Plot number of close-packed spheres over tubing length:
+
+```{r}
+volumes %>% 
+  dplyr::mutate(n_droplets = getNumberOfClosePackedSpheres(radiusDroplet, volume)) %>% 
+  ggplot(aes(x = length, y = n_droplets*1e-6, color = type)) +
+  geom_line() +
+  scale_colour_viridis_d(labels = c("PTFE", "Tygon")) + 
+  labs(x = "Tubing length [m]",
+       y = "Number of close-packed spheres [million]",
+       color = "Tubing type") + 
+  theme_fynn()
+```
 
 
 

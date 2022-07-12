@@ -33,3 +33,6 @@ devtools::install_github("fynnwi/masterthesis")
 ## To do
 
 - calculate hydraulic resistance and pressure drop as function of channel length
+- implement colors
+- implement references
+
