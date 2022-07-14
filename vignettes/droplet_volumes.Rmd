@@ -65,13 +65,49 @@ ggplot(volumes, aes(x = length, y = volume * 1e9, color = type)) +
   labs(x = "Tubing length [m]",
        y = "Tubing volume [µL]",
        color = "Tubing type") + 
-  theme_fynn()
+  theme_pretty()
 ```
 
 
 
 
 ### Droplets
+
+How much liquid is contained in a droplet of diameter $d$?
+
+Volume of a sphere:
+$$V = \frac{4}{3} \pi r^3$$
+
+```{r}
+getSphereVolume <- function(radius) {
+  return(4/3 * pi * radius^3)
+}
+```
+
+
+Plot droplet volumes as function of diameter:
+
+```{r}
+tibble::tibble("diameter" = seq(10, 100) * 1e-6) %>% # 10-200 µm droplets
+  dplyr::mutate("volume" = getSphereVolume(diameter/2)) %>% 
+  ggplot(aes(x = diameter*1e6, y = volume * 1e15)) + # y-axis in picoliters
+  geom_line() +
+  labs(x = "Droplet diameter [µm]",
+       y = "Droplet volume [pL]") + 
+  theme_pretty()
+
+```
+
+
+For droplet sizes up to 40 µm:
+
+```{r}
+last_plot() + 
+  coord_cartesian(xlim = c(10, 40), ylim = c(0, 35))
+```
+
+
+
 
 How many droplets are there in x mm of Tygon/PTFE tubing?
 
@@ -107,7 +143,7 @@ volumes %>%
   labs(x = "Tubing length [m]",
        y = "Number of close-packed spheres [million]",
        color = "Tubing type") + 
-  theme_fynn()
+  theme_pretty()
 ```
 
 

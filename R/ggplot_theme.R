@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @importFrom ggplot2 theme_bw theme element_text element_blank element_rect element_line margin unit
-theme_fynn <- function() {
+theme_pretty <- function() {
   theme_bw() +
     theme(axis.title = element_text(size = 9, color = "black"), axis.text = element_text(size = 8, color = "#333333"),
           legend.title = element_text(size = 9), legend.text = element_text(size = 8),

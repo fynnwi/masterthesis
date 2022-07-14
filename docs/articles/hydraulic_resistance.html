@@ -79,8 +79,11 @@
 </h2>
 <p>Hydraulic analogy of Ohm’s law:</p>
 <p><span class="math display">\[\Delta P = R_h Q\]</span> with <span class="math inline">\(R_h\)</span> hydraulic resistance.</p>
-<p>For a (straight) channel with circular cross-section, <span class="math inline">\(R_h = \frac{8 \mu L}{\pi r^4}\)</span> with <span class="math inline">\(\mu\)</span> dynamic viscosity, <span class="math inline">\(L\)</span> channel length, and <span class="math inline">\(r\)</span> channel radius. For water I am using
-<span class="math inline">\(\mu = 8.9 \cdot 10^{-4} \; \mathrm{Pa \cdot
+<p>For a (straight) channel with circular cross-section, the hydraulic
+resistance is defined as <span class="math inline">\(R_h = \frac{8 \mu
+L}{\pi r^4}\)</span> with <span class="math inline">\(\mu\)</span>
+dynamic viscosity, <span class="math inline">\(L\)</span> channel
+length, and <span class="math inline">\(r\)</span> channel radius <span class="citation">(Bruus 2008)</span>. For water I am using <span class="math inline">\(\mu = 8.9 \cdot 10^{-4} \; \mathrm{Pa \cdot
 s}\)</span>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">muWater</span> <span class="op">&lt;-</span> <span class="fl">8.9e-4</span>
@@ -118,7 +121,7 @@ s}\)</span>.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tubing length [cm]"</span>,
        y <span class="op">=</span> <span class="st">"Hydraulic resistance [10¹¹ Pa s m⁻³]"</span>,
        color <span class="op">=</span> <span class="st">"Tubing type"</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="../reference/theme_fynn.html">theme_fynn</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="../reference/theme_pretty.html">theme_pretty</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="hydraulic_resistance_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Plot flow rate resulting from pressure drop of 1 Pa as function of
 tubing length:</p>
@@ -132,7 +135,7 @@ tubing length:</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tubing length [cm]"</span>,
        y <span class="op">=</span> <span class="st">"Flow rate at 1 Pa [uL/s]"</span>,
        color <span class="op">=</span> <span class="st">"Tubing type"</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="../reference/theme_fynn.html">theme_fynn</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="../reference/theme_pretty.html">theme_pretty</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="hydraulic_resistance_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div class="section level2">
@@ -144,6 +147,16 @@ tubing length:</p>
 <h2 id="networks">Networks<a class="anchor" aria-label="anchor" href="#networks"></a>
 </h2>
 <p>TODO</p>
+</div>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-bruus_theoretical_2008" class="csl-entry">
+Bruus, Henrik. 2008. <em>Theoretical Microfluidics</em>. Oxford Master
+Series in Physics 18. Oxford ; New York: Oxford University Press.
+</div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

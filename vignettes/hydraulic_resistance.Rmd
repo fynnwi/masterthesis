@@ -1,6 +1,7 @@
 ---
 title: "Hydraulic resistance"
 output: rmarkdown::html_vignette
+bibliography: "bibliography.bib"
 vignette: >
   %\VignetteIndexEntry{Hydraulic resistance}
   %\VignetteEngine{knitr::rmarkdown}
@@ -25,7 +26,7 @@ Hydraulic analogy of Ohm's law:
 
 $$\Delta P = R_h Q$$ with $R_h$ hydraulic resistance.
 
-For a (straight) channel with circular cross-section, $R_h = \frac{8 \mu L}{\pi r^4}$ with $\mu$ dynamic viscosity, $L$ channel length, and $r$ channel radius.
+For a (straight) channel with circular cross-section, the hydraulic resistance is defined as $R_h = \frac{8 \mu L}{\pi r^4}$ with $\mu$ dynamic viscosity, $L$ channel length, and $r$ channel radius [@bruus_theoretical_2008].
 For water I am using $\mu = 8.9 \cdot 10^{-4} \; \mathrm{Pa \cdot s}$.
 
 
@@ -57,7 +58,7 @@ ggplot(resistance, aes(x = length*1e2, y = r_hydraulic*1e-11, color = type)) +
   labs(x = "Tubing length [cm]",
        y = "Hydraulic resistance [10¹¹ Pa s m⁻³]",
        color = "Tubing type") + 
-  theme_fynn()
+  theme_pretty()
 ```
 
 
@@ -76,7 +77,7 @@ resistance %>%
   labs(x = "Tubing length [cm]",
        y = "Flow rate at 1 Pa [uL/s]",
        color = "Tubing type") + 
-  theme_fynn()
+  theme_pretty()
 ```
 
 
@@ -95,3 +96,4 @@ TODO
 
 TODO
 
+## References
