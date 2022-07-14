@@ -35,4 +35,5 @@ devtools::install_github("fynnwi/masterthesis")
 - implement colors
 - implement references
 - droplet volumes as function of diameter
+- electric field voltages Vpp, Vrms etc
 
